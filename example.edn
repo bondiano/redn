@@ -1,0 +1,12 @@
+(#rust/edn example/kitchensink ; tagged symbol
+ nil ; ugh..
+ \space ; character
+ "dynamic \"typing\"" ; string
+ {:numbers ; keyword
+  [42 ; integer
+   42.0 ; floating
+  ] ; Vector
+  :bools
+  #{true false} ; Set
+ } ; Map
+) ; List

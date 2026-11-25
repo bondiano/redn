@@ -1,0 +1,51 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/redn-ast",
+    "crates/redn-macros",
+    "crates/redn",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/bondiano/redn"
+homepage = "https://github.com/bondiano/redn"
+keywords = ["edn", "clojure", "parser", "serialization", "pretty-printer"]
+categories = ["encoding", "parser-implementations", "data-structures"]
+rust-version = "1.95"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unused_must_use = "deny"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+# import items instead of naming them through a module path in code
+absolute_paths = "warn"
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "warn"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+must_use_candidate = "allow"
+module_name_repetitions = "allow"
+
+[workspace.dependencies]
+chrono = { version = "0.4", default-features = false, features = ["std", "alloc"] }
+proc-macro2 = "1"
+proptest = "1"
+quote = "1"
+redn-ast = { path = "crates/redn-ast", version = "0.1.0" }
+redn-macros = { path = "crates/redn-macros", version = "0.1.0" }
+syn = { version = "2", default-features = false, features = ["parsing", "printing", "proc-macro", "derive"] }
+uuid = { version = "1", default-features = false, features = ["std"] }
+
+# Backtraces keep file and line; full variable info only bloats target/.
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true

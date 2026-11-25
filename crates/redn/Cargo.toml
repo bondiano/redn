@@ -1,0 +1,30 @@
+[package]
+name = "redn"
+description = "EDN (Extensible Data Notation) parsing, encoding, decoding, macros, and recursion schemes"
+readme = "../../README.md"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = ["macros", "uuid", "chrono"]
+macros = ["dep:redn-macros"]
+uuid = ["dep:uuid"]
+chrono = ["dep:chrono"]
+
+[dependencies]
+chrono = { workspace = true, optional = true }
+redn-ast.workspace = true
+redn-macros = { workspace = true, optional = true }
+uuid = { workspace = true, optional = true }
+
+[dev-dependencies]
+proptest.workspace = true
